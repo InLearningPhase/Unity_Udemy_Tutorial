@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Hacker : MonoBehaviour { 
     
+    string[] level1password = {"a", "b"};
+    string[] level2password = {"c", "d"};
     int level;
     enum Screen {MainMenu, Password, Win};
     Screen currentScreen;
@@ -43,20 +45,15 @@ public class Hacker : MonoBehaviour {
 
    void RunMainMenu(string input)
    {
-       if (input == "1")
+       bool isValid = (input == "1" || input == "2");
+       if (isValid)
        {
-            level = 1;
-            StartGame();
-            password = "qwerty";
-	   }
-       else if (input == "2")
-       {
-            level = 2;
-            StartGame();
-            password = "qq";
-	   }
+           level = int.Parse(input);
+           StartGame();
+       }
        else
        {
+            
             Terminal.WriteLine("Please enter a valid choice!");   
        }
    }
@@ -64,7 +61,21 @@ public class Hacker : MonoBehaviour {
    void StartGame()
    {
        currentScreen = Screen.Password;
-       Terminal.WriteLine("You have choosen level " + level);
+       Terminal.ClearScreen();
+       switch (level)
+       {
+           case 1:
+               password = level1password[1];
+               break;
+           
+           case  2:
+               password = level2password[0];
+               break;
+           
+           default:
+               Debug.Log("Please enter a valid password");
+               break;
+       }
        Terminal.WriteLine("Please enter your password: ");
    }
 
