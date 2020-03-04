@@ -65,11 +65,13 @@ public class Hacker : MonoBehaviour {
        switch (level)
        {
            case 1:
-               password = level1password[1];
+               int index1 = Random.Range(0, level1password.Length);
+               password = level1password[index1];
                break;
            
            case  2:
-               password = level2password[0];
+               int index2 = Random.Range(0, level2password.Length);
+               password = level2password[index2];
                break;
            
            default:
